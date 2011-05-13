@@ -4,6 +4,7 @@ Oh Bot
 This is a bot that runs through your web site and tells you it's interpretation of your site.
 
 ![Oh Face](http://i.imgur.com/zvAvS.gif)
+Image from http://obamiconme.pastemagazine.com/entries/343288-o-face.html
 
 
 License
