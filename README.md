@@ -3,7 +3,7 @@ Oh Bot
 
 This is a bot that runs through your web site and tells you it's interpretation of your site.
 
-![Oh Face](http://www.ncaabbs.com/html/funnies/general/oh-face.jpg)
+![Oh Face](http://i.imgur.com/zvAvS.gif)
 
 
 License
