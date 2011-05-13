@@ -1,6 +1,8 @@
-var redback = require('redback').createClient(),
-    spider = require('./lib/spider'),
+var _spider = require('./lib/spider'),
+    _handler = require('./lib/handler'),
     fs = require('fs'),
+    url = require('url'),
+    util = require('util'),
     express = require('express');
 
 var LOG_PATH = '/var/log/oh-bot.log',
@@ -26,15 +28,27 @@ app.get('/stats', function(req, res) {
 });
 
 app.post('/crawl', function(req, res) {
-  var crawler = spider.createCrawler();
+  var _domain = req.body.domain,
+      p_domain = url.parse(_domain),
+      crawler = _spider.createCrawler({
+        host: p_domain.hostname,
+        grace_period: 100 //ms
+      });
+  var handler = _handler.createHandler({crawler: crawler});
 
-  crawler.on('404', function() {
-    console.log('404 mofo');
+  crawler.on('done', function(urls) {
+    console.log('Site crawl is done.');
+    console.log('urls processed: ' + util.inspect(urls, true, 3));
   });
 
-  crawler.crawl();
+  crawler.crawl({
+      path: p_domain.pathname
+  });
 
-  res.render('fire', {});
+  res.render('crawl', {
+    host: p_domain.host,
+    path: p_domain.pathname
+  });
 });
 
 app.get('/', function(req, res) {
