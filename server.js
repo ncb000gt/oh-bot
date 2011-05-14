@@ -32,6 +32,7 @@ app.post('/crawl', function(req, res) {
       p_domain = url.parse(_domain),
       crawler = _spider.createCrawler({
         host: p_domain.hostname,
+        port: p_domain.port,
         grace_period: 100 //ms
       });
   var handler = _handler.createHandler({crawler: crawler});
@@ -47,6 +48,7 @@ app.post('/crawl', function(req, res) {
 
   res.render('crawl', {
     host: p_domain.host,
+    port: p_domain.port,
     path: p_domain.pathname
   });
 });
