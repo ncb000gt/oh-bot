@@ -39,7 +39,9 @@ app.post('/crawl', function(req, res) {
 
   crawler.on('done', function(urls) {
     console.log('Site crawl is done.');
-    console.log('urls processed: ' + util.inspect(urls, true, 3));
+    urls.keys(function(err, keys) {
+      console.log('urls processed: ' + util.inspect(keys));
+    });
   });
 
   crawler.crawl({
